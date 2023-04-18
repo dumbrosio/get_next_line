@@ -1,9 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/19 01:43:32 by vd-ambro          #+#    #+#             */
+/*   Updated: 2023/04/19 01:49:19 by vd-ambro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <string.h>
+
+char*	ft_strcpy(char* dest, const char* src)
+{
+	char* result = dest;
+
+	while (*src != '\0')
+	{
+		*dest = *src;
+		dest++;
+		src++;
+	}
+	*dest = '\0';
+	return result;
+}
+
+char	*ft_strncat(char *dest, const char *src, size_t n)
+{
+	char *result = dest;
+
+	while (*dest != '\0')
+		dest++;
+
+	while (*src != '\0' && n > 0)
+	{
+		*dest++ = *src++;
+		n--;
+	}
+	*dest = '\0';
+	return result;
+}
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -70,18 +112,17 @@ char	*get_next_line(int fd)
 	char		temp[BUFFER_SIZE + 1];
 	char		*line;
 	static char	*reminder = NULL;
-	int		i;
+	int			i;
 	
 	temp[BUFFER_SIZE] = '\0';	
 	
 	line = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 	
 	if (reminder != NULL)
-		strcpy(line, reminder);
+		ft_strcpy(line, reminder);
 
 	if (!line)
 		return (NULL);
-
 
 	while (!ft_strchr(temp, '\n'))
 	{	
@@ -95,22 +136,15 @@ char	*get_next_line(int fd)
 
 		if (temp[i] == '\n')
 		{
-			line = strncat(line, temp, i + 1);
+			line = ft_strncat(line, temp, i);
 			reminder = (char *)malloc((sizeof(char) * BUFFER_SIZE) - i + 1);
-			ft_strlcpy(reminder, temp + i + 1, BUFFER_SIZE - i +1);
-
-			//printf("temp is %s\n", temp);
-			//printf("line is %s\n", line);
-			printf("reminder is %s\n", reminder);
+			ft_strlcpy(reminder, temp + i + 1, BUFFER_SIZE - i + 1);
 
 		}
 		else
 			line = ft_strjoin(line, temp);
 
-
-		//printf("temp_2 is %s\n", temp);
-		printf("line is %s\n", line);
-		
 	}
+    printf("reminder is: %s\n", reminder);
 	return (line);
 }
