@@ -4,6 +4,19 @@
 #include <fcntl.h>
 #include <errno.h>
 
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+	}
+	if ((char)c == '\0')
+		return ((char *)s);
+	return (0);
+}
+
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
@@ -53,7 +66,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 char	*get_next_line(int fd)
 {
-	char		buffer[BUFFER_SIZE];
+	char		temp[BUFFER_SIZE];
 	char		*line;
 	//static char	*reminder = NULL;
 	int		i;
@@ -64,12 +77,17 @@ char	*get_next_line(int fd)
 		return (NULL);
 	
 	i = 0;
-	while (buffer[i] != '\n')
-	{
-		read(fd, buffer, BUFFER_SIZE);
-		line = ft_strjoin(line, buffer);
-	}
+	while (!ft_strchr(temp, '\n'))
+	{	
+		read(fd, temp, BUFFER_SIZE);
 	
-
+		temp[BUFFER_SIZE] = '\0';	
+		printf("temp is %s\n", temp);
+	
+		line = ft_strjoin(line, temp);
+		printf("line is %s\n", line);
+		
+		i++;
+	}
 	return (line);
 }
