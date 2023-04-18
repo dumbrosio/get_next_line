@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <string.h>
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -66,28 +67,50 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 char	*get_next_line(int fd)
 {
-	char		temp[BUFFER_SIZE];
+	char		temp[BUFFER_SIZE + 1];
 	char		*line;
-	//static char	*reminder = NULL;
+	static char	*reminder = NULL;
 	int		i;
+	
+	temp[BUFFER_SIZE] = '\0';	
 	
 	line = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
 	
+	if (reminder != NULL)
+		strcpy(line, reminder);
+
 	if (!line)
 		return (NULL);
-	
-	i = 0;
+
+
 	while (!ft_strchr(temp, '\n'))
 	{	
 		read(fd, temp, BUFFER_SIZE);
-	
-		temp[BUFFER_SIZE] = '\0';	
-		printf("temp is %s\n", temp);
-	
-		line = ft_strjoin(line, temp);
+		
+		i = 0;
+		while (temp[i] && temp[i] != '\n')
+		{
+			i++;
+		}
+
+		if (temp[i] == '\n')
+		{
+			line = strncat(line, temp, i + 1);
+			reminder = (char *)malloc((sizeof(char) * BUFFER_SIZE) - i + 1);
+			ft_strlcpy(reminder, temp + i + 1, BUFFER_SIZE - i +1);
+
+			//printf("temp is %s\n", temp);
+			//printf("line is %s\n", line);
+			printf("reminder is %s\n", reminder);
+
+		}
+		else
+			line = ft_strjoin(line, temp);
+
+
+		//printf("temp_2 is %s\n", temp);
 		printf("line is %s\n", line);
 		
-		i++;
 	}
 	return (line);
 }

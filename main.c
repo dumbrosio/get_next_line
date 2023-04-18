@@ -6,7 +6,7 @@
 /*   By: vd-ambro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 15:48:34 by vd-ambro          #+#    #+#             */
-/*   Updated: 2023/04/14 18:17:15 by vd-ambro         ###   ########.fr       */
+/*   Updated: 2023/04/18 19:28:03 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(void)
 	
 	line = get_next_line(fd);
 	
-	printf("%s\n", line);
+	//printf("%s\n", line);
 	
 	free(line);
 
