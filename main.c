@@ -6,17 +6,13 @@
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 15:48:34 by vd-ambro          #+#    #+#             */
-/*   Updated: 2023/04/19 01:42:43 by vd-ambro         ###   ########.fr       */
+/*   Updated: 2023/04/20 18:30:29 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <errno.h>
 
-char	*get_next_line(int fd);
+
+#include "get_next_line.h"
 
 int	main(void)
 {
@@ -32,11 +28,17 @@ int	main(void)
 	
 	printf("opened\n");
 	
-	line = get_next_line(fd);
+	// line = get_next_line(fd);
 	
-	printf("returned line is: %s\n", line);
+	// // printf("returned line is: %s\n", line);
+
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("line: %s\n", line);
+		free(line);
+	}
 	
-	free(line);
+	// free(line);	
 
 	close(fd);
 	
