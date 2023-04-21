@@ -6,7 +6,7 @@
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 18:20:54 by vd-ambro          #+#    #+#             */
-/*   Updated: 2023/04/21 17:51:02 by vd-ambro         ###   ########.fr       */
+/*   Updated: 2023/04/21 18:11:41 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <fcntl.h>
 # include <errno.h>
 
-char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize);
