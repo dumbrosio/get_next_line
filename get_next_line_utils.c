@@ -6,25 +6,11 @@
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 18:01:34 by vxvalerio         #+#    #+#             */
-/*   Updated: 2023/04/20 18:21:33 by vd-ambro         ###   ########.fr       */
+/*   Updated: 2023/04/21 17:46:07 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char*	ft_strcpy(char* dest, const char* src)
-{
-	char* result = dest;
-
-	while (*src != '\0')
-	{
-		*dest = *src;
-		dest++;
-		src++;
-	}
-	*dest = '\0';
-	return result;
-}
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -68,43 +54,37 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
 	return (srclen);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(const char *src)
 {
-	char *s2 = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
-	if (!s2)
+	char	*dst;
+	char	*temp_dst;
+	size_t	len;
+
+	len = ft_strlen(src) + 1;
+	temp_dst = malloc(len);
+	dst = temp_dst;
+	if (dst == NULL)
 		return (NULL);
-	ft_strcpy(s2, s1);
-	return (s2);
+	ft_strlcpy(dst, src, len);
+	free(temp_dst);
+	return (dst);
 }
 
 char	*ft_strjoin(char *s1, char const *s2)
 {
-	char	*joined;
-	size_t	len_s1;
-	size_t	len_s2;
-	size_t	i;
-	size_t	j;
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*join;
 
 	if (!s1 || !s2)
 		return (NULL);
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	joined = malloc((len_s1 + len_s2 + 1) * sizeof(char));
-	if (!joined)
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	join = (char *)malloc((s1_len + s2_len + 1) * sizeof(char));
+	if (!join)
 		return (NULL);
-	i = 0;
-	while (i < len_s1)
-	{
-		joined[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (j < len_s2)
-	{
-		joined[i + j] = s2[j];
-		j++;
-	}
-	joined[i + j] = '\0';
+	ft_strlcpy(join, s1, s1_len + 1);
+	ft_strlcpy((join + s1_len), s2, s2_len + 1);
 	free(s1);
-	return (joined);
+	return (join);
 }
