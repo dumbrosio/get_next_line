@@ -6,7 +6,7 @@
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 01:43:32 by vd-ambro          #+#    #+#             */
-/*   Updated: 2023/04/21 18:03:35 by vd-ambro         ###   ########.fr       */
+/*   Updated: 2023/04/22 20:51:19 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,20 @@ char	*get_next_line(int fd)
 	int	bytes_to_copy;
 
 	line = ft_strdup(reminder);
-	while (!(ft_strchr(line, '\n'))
-		&& (bytes_read = read(fd, reminder, BUFFER_SIZE)) > 0)
+	while (1)
 	{
+		if (ft_strchr(line, '\n'))
+			break;
+		bytes_read = read(fd, reminder, BUFFER_SIZE);
+		if (bytes_read == 0)
+			break;
+		if (bytes_read < 0)
+			return (free(line), NULL);
 		reminder[bytes_read] = '\0';
 		line = ft_strjoin(line, reminder);
 	}
 	if (ft_strlen(line) == 0)
-		return (NULL);
+		return (free(line), NULL);
 	newline = ft_strchr(line, '\n');
 	if (newline != NULL)
 	{

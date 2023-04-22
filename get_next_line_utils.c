@@ -6,7 +6,7 @@
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 18:01:34 by vxvalerio         #+#    #+#             */
-/*   Updated: 2023/04/21 17:46:07 by vd-ambro         ###   ########.fr       */
+/*   Updated: 2023/04/22 20:47:44 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,13 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
 char	*ft_strdup(const char *src)
 {
 	char	*dst;
-	char	*temp_dst;
 	size_t	len;
 
 	len = ft_strlen(src) + 1;
-	temp_dst = malloc(len);
-	dst = temp_dst;
+	dst = malloc(len);
 	if (dst == NULL)
 		return (NULL);
 	ft_strlcpy(dst, src, len);
-	free(temp_dst);
 	return (dst);
 }
 
