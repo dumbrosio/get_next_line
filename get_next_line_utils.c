@@ -6,7 +6,7 @@
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 18:01:34 by vxvalerio         #+#    #+#             */
-/*   Updated: 2023/04/22 20:47:44 by vd-ambro         ###   ########.fr       */
+/*   Updated: 2023/04/22 23:02:33 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*ft_strdup(const char *src)
 	return (dst);
 }
 
-char	*ft_strjoin(char *s1, char const *s2)
+char	*ft_strjoinf(char *s1, char const *s2)
 {
 	size_t	s1_len;
 	size_t	s2_len;
