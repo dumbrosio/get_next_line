@@ -6,11 +6,9 @@
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 15:48:34 by vd-ambro          #+#    #+#             */
-/*   Updated: 2023/04/20 18:30:29 by vd-ambro         ###   ########.fr       */
+/*   Updated: 2023/04/23 09:34:53 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "get_next_line.h"
 
@@ -25,24 +23,13 @@ int	main(void)
 		perror("open");
 		exit(EXIT_FAILURE);
 	}
-	
-	printf("opened\n");
-	
-	// line = get_next_line(fd);
-	
-	// // printf("returned line is: %s\n", line);
-
+	printf("opened\n");	
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		printf("line: %s\n", line);
 		free(line);
 	}
-	
-	// free(line);	
-
 	close(fd);
-	
 	printf("closed\n");
-
 	return (0);
 }
