@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/30 12:56:17 by vd-ambro          #+#    #+#             */
-/*   Updated: 2023/04/30 13:23:52 by vd-ambro         ###   ########.fr       */
+/*   Created: 2023/04/30 12:55:54 by vd-ambro          #+#    #+#             */
+/*   Updated: 2023/04/30 13:26:28 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*get_line(char *backup)
 {
-	size_t		size;
-	size_t		i;
-	char		*line;
+	size_t	size;
+	size_t	i;
+	char	*line;
 
 	size = 0;
 	if (*backup == '\0')
@@ -50,7 +50,10 @@ static char	*get_rest(char *backup)
 	if (backup[i] == '\n')
 		i++;
 	if (backup[i] == '\0')
-		return (free(backup), NULL);
+	{
+		free(backup);
+		return (NULL);
+	}
 	str = malloc(sizeof(char) * (ft_strlen(backup) - i + 1));
 	if (!str)
 		return (NULL);
@@ -90,18 +93,17 @@ static char	*read_line(char *backup, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	*reminder;
+	static char	*backup[1024];
 	char		*line;
 
-	if (BUFFER_SIZE == 0)
+	if (BUFFER_SIZE == 0 || fd < 0)
 	{
-		exit(1);
 		return (NULL);
 	}
-	reminder = read_line(reminder, fd);
-	if (!reminder)
+	backup[fd] = read_line(backup[fd], fd);
+	if (!backup[fd])
 		return (NULL);
-	line = get_line(reminder);
-	reminder = get_rest(reminder);
+	line = get_line(backup[fd]);
+	backup[fd] = get_rest(backup[fd]);
 	return (line);
 }

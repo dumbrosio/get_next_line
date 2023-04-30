@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/30 13:29:05 by vd-ambro          #+#    #+#             */
-/*   Updated: 2023/04/30 13:29:07 by vd-ambro         ###   ########.fr       */
+/*   Created: 2023/04/30 13:28:35 by vd-ambro          #+#    #+#             */
+/*   Updated: 2023/04/30 13:28:40 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	get_index(const char *s, char c)
 {
@@ -62,9 +62,9 @@ char	*ft_strdup(const char *src)
 
 char	*ft_strjoin(char *s1, char const *s2)
 {
-	char	*joined;
-	size_t	i;
-	size_t	j;
+	char *joined;
+	size_t i;
+	size_t j;
 
 	if (!s1)
 		s1 = ft_strdup("");

@@ -5,28 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/14 15:48:34 by vd-ambro          #+#    #+#             */
-/*   Updated: 2023/04/23 09:34:53 by vd-ambro         ###   ########.fr       */
+/*   Created: 2023/04/30 12:56:26 by vd-ambro          #+#    #+#             */
+/*   Updated: 2023/04/30 13:30:36 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include <errno.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+char	*get_next_line(int fd);
 
 int	main(void)
 {
-	int	fd;
+	int		fd;
 	char	*line;
-	
+
 	fd = open("./test.txt", O_RDONLY);
 	if (fd == -1)
 	{
 		perror("open");
 		exit(EXIT_FAILURE);
 	}
-	printf("opened\n");	
+	printf("opened\n");
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		printf("line: %s\n", line);
+		printf("line: %s", line);
 		free(line);
 	}
 	close(fd);
