@@ -6,7 +6,7 @@
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:29:21 by vd-ambro          #+#    #+#             */
-/*   Updated: 2023/04/30 13:29:23 by vd-ambro         ###   ########.fr       */
+/*   Updated: 2023/05/03 15:22:08 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@
 #  define BUFFER_SIZE 42
 # endif
 
-# include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <strings.h>
 # include <unistd.h>
 
 char	*get_next_line(int fd);

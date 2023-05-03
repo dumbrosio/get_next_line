@@ -6,24 +6,24 @@
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 12:56:17 by vd-ambro          #+#    #+#             */
-/*   Updated: 2023/04/30 13:23:52 by vd-ambro         ###   ########.fr       */
+/*   Updated: 2023/05/03 15:08:12 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*get_line(char *backup)
+static char	*get_line(char *reminder)
 {
-	size_t		size;
-	size_t		i;
-	char		*line;
+	size_t	size;
+	size_t	i;
+	char	*line;
 
 	size = 0;
-	if (*backup == '\0')
+	if (*reminder == '\0')
 		return (NULL);
-	while (backup[size] && backup[size] != '\n')
+	while (reminder[size] && reminder[size] != '\n')
 		size++;
-	if (backup[size] == '\n')
+	if (reminder[size] == '\n')
 		size++;
 	line = malloc(sizeof(char) * size + 1);
 	if (!line)
@@ -31,61 +31,58 @@ static char	*get_line(char *backup)
 	i = 0;
 	while (i < size)
 	{
-		line[i] = backup[i];
+		line[i] = reminder[i];
 		i++;
 	}
 	line[i] = '\0';
 	return (line);
 }
 
-static char	*get_rest(char *backup)
+static char	*get_rest(char *reminder)
 {
 	char	*str;
 	int		i;
 	int		j;
 
 	i = 0;
-	while (backup[i] && backup[i] != '\n')
+	while (reminder[i] && reminder[i] != '\n')
 		i++;
-	if (backup[i] == '\n')
+	if (reminder[i] == '\n')
 		i++;
-	if (backup[i] == '\0')
-		return (free(backup), NULL);
-	str = malloc(sizeof(char) * (ft_strlen(backup) - i + 1));
+	if (reminder[i] == '\0')
+		return (free(reminder), NULL);
+	str = malloc(sizeof(char) * (ft_strlen(reminder) - i + 1));
 	if (!str)
 		return (NULL);
 	j = 0;
-	while (backup[i])
-		str[j++] = backup[i++];
+	while (reminder[i])
+		str[j++] = reminder[i++];
 	str[j] = '\0';
-	free(backup);
+	free(reminder);
 	return (str);
 }
 
-static char	*read_line(char *backup, int fd)
+static char	*read_line(char *reminder, int fd)
 {
 	int		byte;
-	char	*buff;
+	char	*buf;
 
-	buff = malloc(BUFFER_SIZE + 1 * sizeof(char));
-	if (!buff)
+	buf = malloc(BUFFER_SIZE + 1 * sizeof(char));
+	if (!buf)
 		return (NULL);
 	byte = 1;
-	while (byte > 0 && get_index(backup, '\n') == -1)
+	while (byte > 0 && get_index(reminder, '\n') == -1)
 	{
-		byte = read(fd, buff, BUFFER_SIZE);
+		byte = read(fd, buf, BUFFER_SIZE);
 		if (byte == 0)
 			break ;
 		if (byte == -1)
-		{
-			free(buff);
-			return (NULL);
-		}
-		buff[byte] = '\0';
-		backup = ft_strjoin(backup, buff);
+			return (free(reminder), NULL);
+		buf[byte] = '\0';
+		reminder = ft_strjoin(reminder, buf);
 	}
-	free(buff);
-	return (backup);
+	free(buf);
+	return (reminder);
 }
 
 char	*get_next_line(int fd)
