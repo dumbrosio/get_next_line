@@ -90,6 +90,8 @@ char	*get_next_line(int fd)
 	static char	*reminder;
 	char		*line;
 
+    if (fd < 0 || fd >= 4096 || fd == 1 || fd == 2 || BUFFER_SIZE <= 0)
+		return (NULL);
 	if (BUFFER_SIZE == 0)
 	{
 		exit(1);
