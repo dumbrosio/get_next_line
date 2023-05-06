@@ -6,7 +6,7 @@
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 13:29:05 by vd-ambro          #+#    #+#             */
-/*   Updated: 2023/05/03 15:16:22 by vd-ambro         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:23:09 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*ft_strjoin(char *s1, char const *s2)
 	j = 0;
 	while (s2[j])
 		joined[i++] = s2[j++];
-	joined[i] = 0;
+	joined[i] = '\0';
 	free(s1);
 	return (joined);
 }

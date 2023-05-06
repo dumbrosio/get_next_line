@@ -6,11 +6,34 @@
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 12:56:17 by vd-ambro          #+#    #+#             */
-/*   Updated: 2023/05/03 15:08:12 by vd-ambro         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:22:34 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+static char	*read_line(char *reminder, int fd)
+{
+	int		byte;
+	char	*buf;
+
+	buf = malloc(BUFFER_SIZE + 1 * sizeof(char));
+	if (!buf)
+		return (NULL);
+	byte = 1;
+	while (byte > 0 && get_index(reminder, '\n') == -1)
+	{
+		byte = read(fd, buf, BUFFER_SIZE);
+		if (byte == 0)
+			break ;
+		if (byte == -1)
+			return (free(reminder), NULL);
+		buf[byte] = '\0';
+		reminder = ft_strjoin(reminder, buf);
+	}
+	free(buf);
+	return (reminder);
+}
 
 static char	*get_line(char *reminder)
 {
@@ -62,35 +85,12 @@ static char	*get_rest(char *reminder)
 	return (str);
 }
 
-static char	*read_line(char *reminder, int fd)
-{
-	int		byte;
-	char	*buf;
-
-	buf = malloc(BUFFER_SIZE + 1 * sizeof(char));
-	if (!buf)
-		return (NULL);
-	byte = 1;
-	while (byte > 0 && get_index(reminder, '\n') == -1)
-	{
-		byte = read(fd, buf, BUFFER_SIZE);
-		if (byte == 0)
-			break ;
-		if (byte == -1)
-			return (free(reminder), NULL);
-		buf[byte] = '\0';
-		reminder = ft_strjoin(reminder, buf);
-	}
-	free(buf);
-	return (reminder);
-}
-
 char	*get_next_line(int fd)
 {
 	static char	*reminder;
 	char		*line;
 
-    if (fd < 0 || fd >= 4096 || fd == 1 || fd == 2 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= 4096 || fd == 1 || fd == 2 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (BUFFER_SIZE == 0)
 	{
