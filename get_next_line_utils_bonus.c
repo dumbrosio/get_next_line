@@ -6,7 +6,7 @@
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 01:13:52 by vd-ambro          #+#    #+#             */
-/*   Updated: 2023/05/16 01:13:52 by vd-ambro         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:55:23 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(const char *str)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (!str)
@@ -41,9 +41,9 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_strdup(const char *src)
 {
-	size_t srcsize;
-	size_t i;
-	char *dst;
+	size_t	srcsize;
+	size_t	i;
+	char	*dst;
 
 	i = 0;
 	srcsize = ft_strlen(src);
@@ -61,9 +61,9 @@ char	*ft_strdup(const char *src)
 
 char	*ft_strjoin(char *s1, char const *s2)
 {
-	char *joined;
-	size_t i;
-	size_t j;
+	char	*joined;
+	size_t	i;
+	size_t	j;
 
 	if (!s1)
 		s1 = ft_strdup("");

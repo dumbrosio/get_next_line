@@ -6,17 +6,16 @@
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 01:20:38 by vd-ambro          #+#    #+#             */
-/*   Updated: 2023/05/16 01:20:38 by vd-ambro         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:52:52 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-
 char	*ft_read(int fd, char *str)
 {
-	char *buff;
-	int bytes;
+	char	*buff;
+	int		bytes;
 
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
@@ -39,8 +38,8 @@ char	*ft_read(int fd, char *str)
 
 char	*get_line(char *line)
 {
-	int i;
-	char *newstr;
+	int		i;
+	char	*newstr;
 
 	i = 0;
 	if (!line[i])
@@ -67,10 +66,10 @@ char	*get_line(char *line)
 
 char	*get_rest(char *str)
 {
-	char *newstr;
-	char *temp;
-	int i;
-	int j;
+	char	*newstr;
+	char	*temp;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (str[i] && str[i] != '\n')
@@ -95,8 +94,8 @@ char	*get_rest(char *str)
 
 char	*get_next_line(int fd)
 {
-	char *line;
-	static char *str[OPEN_MAX];
+	char		*line;
+	static char	*str[OPEN_MAX];
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
 		return (NULL);

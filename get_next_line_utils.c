@@ -6,7 +6,7 @@
 /*   By: vd-ambro <vd-ambro@student.42roma.it>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 23:47:00 by vd-ambro          #+#    #+#             */
-/*   Updated: 2023/05/16 00:11:07 by vd-ambro         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:54:21 by vd-ambro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ char	*ft_strdup(const char *src)
 
 char	*ft_strjoin(char *s1, char const *s2)
 {
-	char *joined;
-	size_t i;
-	size_t j;
+	char	*joined;
+	size_t	i;
+	size_t	j;
 
 	if (!s1)
 		s1 = ft_strdup("");
