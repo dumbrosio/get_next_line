@@ -36,28 +36,28 @@ char	*ft_read(int fd, char *str)
 	return (str);
 }
 
-char	*get_line(char *line)
+char	*get_line(char *str)
 {
-	int		i;
 	char	*newstr;
+	int		i;
 
 	i = 0;
-	if (!line[i])
+	if (!str[i])
 		return (NULL);
-	while (line[i] && line[i] != '\n')
+	while (str[i] && str[i] != '\n')
 		i++;
 	newstr = (char *)malloc(sizeof(char) * (i + 2));
 	if (!newstr)
 		return (NULL);
 	i = 0;
-	while (line[i] && line[i] != '\n')
+	while (str[i] && str[i] != '\n')
 	{
-		newstr[i] = line[i];
+		newstr[i] = str[i];
 		i++;
 	}
-	if (line[i] == '\n')
+	if (str[i] == '\n')
 	{
-		newstr[i] = line[i];
+		newstr[i] = str[i];
 		i++;
 	}
 	newstr[i] = '\0';
